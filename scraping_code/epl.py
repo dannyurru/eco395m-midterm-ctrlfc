@@ -69,7 +69,7 @@ def get_stats_from_table(table):
     return stats
 
 def get_team_data_from_soup(season):
-    """Returns a dict with team data for a particular season"""
+    """Returns a dict with team data for a particular season taken as a parameter"""
 
     soup = soupify_season(season)
     table = get_table(soup)
