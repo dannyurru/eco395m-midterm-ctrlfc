@@ -88,7 +88,7 @@ def write_data_to_csv(data, path):
     """Writing data to the CSV file"""
 
     with open(path, "w+") as outfile:
-        outfile.write("Team Name,Games Played,Wins,Draws,Losses,Goals For,Goals Allowed,Goal Difference,Points,Year\n")
+        outfile.write("Team Name,Games Played,Wins,Draws,Losses,Goals For,Goals Against,Goal Difference,Points,Year\n")
         for dict_ in data:
             for i in range(len(dict_["names"])):
                 outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]}\n')
