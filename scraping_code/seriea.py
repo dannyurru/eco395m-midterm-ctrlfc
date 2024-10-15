@@ -16,7 +16,7 @@ for year in range(2003, 2024):
 
 
 def soupify_season(season):
-    """Given a season that extended from season to season + 1, return the soup taken from the ESPN site for EPL scoring table"""
+    """Given a season that extended from season to season + 1, return the soup taken from the ESPN site for Serie A scoring table"""
 
     URL = "https://www.espn.com/soccer/standings/_/league/ita.1/season/"
     url = URL + season
@@ -102,3 +102,16 @@ def write_data_to_csv(data, path):
                 outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]}\n')
 
     
+if __name__ == "__main__":
+
+    BASE_DIR = os.path.expanduser("~/OneDrive/Documents/eco395m-midterm-project/scraping_code")
+
+    CSV_PATH = os.path.join(BASE_DIR, "seriea.csv")
+
+    data = []
+
+    for year in SEASONS:
+        team_data = get_team_data_from_soup(year)
+        data.append(team_data)
+    
+    write_data_to_csv(data, CSV_PATH)
