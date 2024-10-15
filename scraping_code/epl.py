@@ -1,6 +1,7 @@
 import os
 import csv
 import requests
+import statistics
 
 from pprint import pprint
 
@@ -88,10 +89,28 @@ def write_data_to_csv(data, path):
     """Writing data to the CSV file"""
 
     with open(path, "w+") as outfile:
-        outfile.write("Team Name,Games Played,Wins,Draws,Losses,Goals For,Goals Against,Goal Difference,Points,Year\n")
+        outfile.write("Team Name,Games Played,Wins,Draws,Losses,Goals For,Goals Against,Goal Difference,Points,Year,Standing,Relative Team Strength\n")
         for dict_ in data:
             for i in range(len(dict_["names"])):
-                outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]}\n')
+                total_points = 0
+                minimum_GD = 0
+                GD_diffs =[]
+                points_ = []
+                for j in range(len(dict_["names"])):
+                    points_.append(int(dict_["stats"][j]["P"]))
+                    total_points += int(dict_["stats"][j]["P"])
+                    minimum_GD = min(minimum_GD, int(dict_["stats"][j]["GD"]))
+                for j in range(len(dict_["names"])):
+                    GD_diffs.append(int(dict_["stats"][j]["GD"]) - minimum_GD)
+                stdev_GD_diff = statistics.stdev(GD_diffs)
+                stdev_points = statistics.stdev(points_)
+                avg_points = total_points/20
+                dict_["RTS"] = []
+                for j in range(len(dict_["names"])):
+                    team_rts = (int(GD_diffs[j])/stdev_GD_diff)*((int(dict_["stats"][j]["P"]) - avg_points)/stdev_points)
+                    dict_["RTS"].append(team_rts)
+
+                outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]},{i + 1},{dict_["RTS"][j]}\n')
 
     
 if __name__ == "__main__":
