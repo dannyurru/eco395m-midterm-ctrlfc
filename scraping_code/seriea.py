@@ -1,7 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
 import os
+import requests
 import csv
+from pprint import pprint
+
+from bs4 import BeautifulSoup
 
 SEASONS = [str(year) for year in range(2003, 2024)]
 
@@ -98,3 +100,4 @@ if __name__ == "__main__":
         data.append(team_data)
 
     write_data_to_csv(data, CSV_PATH)
+
