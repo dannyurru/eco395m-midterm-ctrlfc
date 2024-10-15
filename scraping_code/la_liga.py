@@ -16,7 +16,7 @@ headers = {
 
 with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
-    writer.writerow(["Team Name"] + ["Games Played", "Wins", "Draws", "Losses", "Goals For", "Goals Against", "Goal Difference", "Points"] + ["Year"])
+    writer.writerow(["Standing" ,"Team Name","Games Played", "Wins", "Draws", "Losses", "Goals For", "Goals Against", "Goal Difference", "Points", "Year"])
 
     for year in range(2003, 2024):
         url = f"https://www.espn.com/soccer/standings/_/league/ESP.1/season/{year}"
@@ -30,6 +30,8 @@ with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
 
         stats = [stat.get_text() for stat in soup.find_all("span", class_="stat-cell")]
 
+        standings = list(range(1, len(teams) + 1))
+
         for i, team in enumerate(teams):
             stats_for_team = stats[i*8:(i+1)*8]
-            writer.writerow([team] + stats_for_team + [year])
+            writer.writerow([standings[i], team] + stats_for_team + [year])
