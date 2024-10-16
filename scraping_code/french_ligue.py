@@ -2,6 +2,7 @@ import os
 import csv
 import requests
 from bs4 import BeautifulSoup
+import statistics
 
 OUTPUT_DIR = "csv_collection"
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "french_ligue_data.csv")
@@ -15,10 +16,11 @@ headers = {
 }
 
 with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
-    writer.writerow(["Standing", "Team Name", "Games Played", "Wins", "Draws", "Losses", 
-                     "Goals For", "Goals Against", "Goal Difference", "Points", "Year"])
-
+    reader = csv.writer(file)
+    reader.writerow(["Standing", "Team Name", "Games Played", "Wins", "Draws", "Losses", 
+                     "Goals For", "Goals Against", "Goal Difference", "Points", "Year", "Relative Team Strenght"])
+    
+    
     for year in range(2003, 2024):
         url = f"https://www.espn.com/soccer/standings/_/league/FRA.1/season/{year}"
         rq = requests.get(url, headers=headers)
@@ -35,7 +37,47 @@ with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
         # Write data to CSV with standings included
         for i, team in enumerate(teams):
             stats_for_team = stats[i*8:(i+1)*8]
-            writer.writerow([standings[i], team] + stats_for_team + [year])
+            reader.writerow([standings[i], team] + stats_for_team + [year])
 
+with open(OUTPUT_PATH, "r", encoding="utf-8") as file:
+    reader = csv.reader(file)
+    header = next(reader)
+    data = [row for row in reader]
+
+yearly_data = {} # This code will help calculate the RTS by year instead of comparing it with all scraped data
+for row in data:
+    year = row[10]
+    if year not in yearly_data:
+        yearly_data[year] = []
+    yearly_data[year].append(row)
+
+for year, rows in yearly_data.items():
+    goal_differences = [] # Numerical data was not associated with any header when scraped, so this will label the
+    points = []           # data for Goal Difference and Points in order to use them for calculations.
+    for row in rows:
+        goal_diff = int(row[8])
+        point = int(row[9])
+        goal_differences.append(goal_diff)
+        points.append(point)
+        
+    min_goal_diff = min(goal_differences) - 1
+    min_points = min(points) - 1
+
+    std_goal_diff = statistics.stdev(goal_differences)
+    std_points = statistics.stdev(points)
+
+    for row in rows:
+        goal_diff = int(row[8])
+        point = int(row[9])
+        rts = ((goal_diff - min_goal_diff) / std_goal_diff) * ((point - min_points) / std_points)
+        rts = round(rts, 2)
+        row.append(rts)
+        
+with open(OUTPUT_PATH, "w", newline="", encoding="utf-8") as file:
+    writer = csv.writer(file)
+    writer.writerow(header + ["Relative Team Strength"])
+    for year, rows in yearly_data.items():
+        writer.writerows(rows)
+        
 if __name__ == "__main__":
     os.makedirs(OUTPUT_DIR, exist_ok=True)
