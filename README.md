@@ -40,14 +40,14 @@ The year of the season,
 
 The standing of each team per season,
 
-The "Relative Team Strength (RTS)" for each team per season
+The "Relative Team Strength" (RTS) for each team per season
 
 # Our Measure
 We are calculating the RTS measure for each team by calculating the following:
 
 (Goal Difference - (Minimum Goal Difference - 1)/std(Goal Difference) * (Points - (Minimum Points - 1))/std(Points)
 
-We will implicitly place scores in brackets based on their RTS:
+Based on the data, we will implicitly place RTS measures into brackets:
 
 0-1: Poor Team Strength
 
