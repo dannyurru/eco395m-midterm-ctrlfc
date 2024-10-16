@@ -49,13 +49,15 @@ We are calculating the RTS measure for each team by calculating the following:
 
 We will implicitly place scores in brackets based on their RTS:
 
-0-5: Poor Team Strength
+0-1: Poor Team Strength
 
-5-10: Fair Team Strength
+1-5: Fair Team Strength
 
-10-15: Good Team Strength
+5-10: Good Team Strength
 
-15+: Great Team Strength
+10-15: Great Team Strength
+
+15+: Historical Team Strength
 
 # Limitations
 Some limitations of our data and measurements include:
