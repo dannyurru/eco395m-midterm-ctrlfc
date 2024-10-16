@@ -47,7 +47,6 @@ We are calculating the RTS measure for each team by calculating the following:
 
 (Goal Difference - (Minimum Goal Difference - 1)/std(Goal Difference) * (Points - (Minimum Points - 1))/std(Points)
 
-=======
 We will implicitly place scores in brackets based on their RTS:
 
 0-5: Poor Team Strength
