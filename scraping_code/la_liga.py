@@ -2,9 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
+import statistics
 
 OUTPUT_DIR = "csv_collection"
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "la_liga_data.csv")
+UPDATED_OUTPUT_PATH = os.path.join(OUTPUT_DIR, "la_liga.csv")
 
 headers = {
         "Accept": "*/*", 
@@ -35,3 +37,42 @@ with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
         for i, team in enumerate(teams):
             stats_for_team = stats[i*8:(i+1)*8]
             writer.writerow([standings[i], team] + stats_for_team + [year])
+
+with open(OUTPUT_PATH, 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    header = next(reader)
+    data = [row for row in reader]
+
+yearly_data = {}
+for row in data:
+    year = row[10]
+    if year not in yearly_data:
+        yearly_data[year] = []
+    yearly_data[year].append(row)
+
+for year, rows in yearly_data.items():
+    goal_differences = []
+    points = []
+    for row in rows:
+        goal_diff = int(row[8])
+        point = int(row[9])
+        goal_differences.append(goal_diff)
+        points.append(point)
+
+    min_goal_diff = min(goal_differences) - 1
+    min_points = min(points) - 1
+
+    std_goal_diff = statistics.stdev(goal_differences)
+    std_points = statistics.stdev(points)
+
+    for row in rows:
+        goal_diff = int(row[8])
+        point = int(row[9])
+        rts = ((goal_diff - min_goal_diff) / std_goal_diff) * ((point - min_points) / std_points)
+        row.append(rts)
+
+with open(OUTPUT_PATH, 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(header + ["RTS"])
+    for year, rows in yearly_data.items():
+        writer.writerows(rows)
