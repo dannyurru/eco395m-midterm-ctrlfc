@@ -133,11 +133,10 @@ def write_data_to_csv(data, path):
                     )
                     dict_["RTS"].append(team_rts)
 
-
-
                 outfile.write(
                     f'{i + 1},{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]},{float(dict_["RTS"][i])}\n'
                 )
+
 
 if __name__ == "__main__":
 
