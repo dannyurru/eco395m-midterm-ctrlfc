@@ -6,7 +6,6 @@ import statistics
 
 OUTPUT_DIR = "csv_collection"
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "la_liga_data.csv")
-UPDATED_OUTPUT_PATH = os.path.join(OUTPUT_DIR, "la_liga.csv")
 
 headers = {
         "Accept": "*/*", 
