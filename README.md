@@ -1,6 +1,8 @@
-# Project Goals
-We want to collect the data from the Big 5 football leagues from 2003 to 2023 inclusive and use the data to create a "Team Strength" measure we can use to compare between leagues.
+# Project Goal
+We want to collect the data from the Big 5 football leagues from 2003 to 2023 inclusive and use the data to create a " Relative Team Strength" (RTS) measure we can use to compare between leagues. 
+We can use the RTS to compare the competitiveness of each season within leagues, and to standarize teams in order to measure across leagues.
 
+# Data Collection
 To collect the data for the Big 5 football leagues, we used the following five links:
 
 Italy: https://www.espn.com/soccer/standings/_/league/ita.1/season/2003
@@ -39,10 +41,13 @@ The "Relative Team Strength (RTS)" for each team per season
 
 We are calculating the RTS measure for each team by calculating the following:
 
-((Goal Difference - the minimum of each Goal Difference)/(the standard deviation of Goal Difference)) x ((Points - the average number of points)/(the standard deviation of Points))
+(Goal Difference - (Minimum Goal Difference - 1)/std(Goal Difference) * (Points - (Minimum Points - 1))/std(Points)
 
 # Findings
 
 
+# Weaknesses of Data and Findings
+
+
 # Reproducibility
-To reproduce the data, you must use ESPN's soccer standing website. 
+To reproduce the data, you must use ESPN's website on soccer standings, regardless of the league. Copy the link without the year at the end and insert it into the base URL to define it. After this, the code should create the CSV file after running it. 
