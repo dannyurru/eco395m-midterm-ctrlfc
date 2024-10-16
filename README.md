@@ -49,13 +49,15 @@ We are calculating the RTS measure for each team by calculating the following:
 
 We will implicitly place scores in brackets based on their RTS:
 
-0-5: Poor Team Strength
+0-1: Poor Team Strength
 
-5-10: Fair Team Strength
+1-5: Fair Team Strength
 
-10-15: Good Team Strength
+5-10: Good Team Strength
 
-15+: Great Team Strength
+10-15: Great Team Strength
+
+15+: Historical Team Strength
 
 # Limitations
 Some limitations of our data and measurements include:
@@ -79,13 +81,13 @@ French Ligue: Paris Saint-Germain (2015-2016) [RTS: 28.51]
 
 
 # Weaknesses of Data and Findings
-The structure of the RTS calculation makes it so the team in the lowest standing of the season would have an RTS of zero. However, when running the calculations, two issues seem to arise:
+When running the calculations, three issues seem to arise:
 
 The team in the last standing will have a RTS that is greater than zero
 
 The team in the last standing will have an RTS that is not the lowest of their respective season
 
-
+The structure of the RTS calculation makes it so the team in the lowest standing of the season would have an RTS of zero. 
 
 # Reproducibility
 To reproduce the data, you must use ESPN's website on soccer standings, regardless of the league. Copy either of the 5 links listed above without the year at the end and insert it into the base URL of either code to define it. After this, the code should create the CSV file after running it. 
