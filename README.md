@@ -76,6 +76,8 @@ La Liga: Barcelona (2018-2019) [RTS: 17.79]
 
 Serie A: Internazionale (2023-2024) [RTS: 17.81]
 
+Bundesliga: Bayern Munich (2017) [RTS: 20.7]
+
 French Ligue: Paris Saint-Germain (2015-2016) [RTS: 28.51]
 
 
