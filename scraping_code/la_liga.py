@@ -42,7 +42,7 @@ with open(OUTPUT_PATH, "r", encoding="utf-8") as file:
     header = next(reader)
     data = [row for row in reader]
 
-yearly_data = {}
+yearly_data = {} # This code will help calculate the RTS by year instead of comparing it with all scraped data
 for row in data:
     year = row[10]
     if year not in yearly_data:
@@ -50,8 +50,8 @@ for row in data:
     yearly_data[year].append(row)
 
 for year, rows in yearly_data.items():
-    goal_differences = []
-    points = []
+    goal_differences = [] # Numerical data was not associated with any header when scraped, so this will label the
+    points = []           # data for Goal Difference and Points in order to use them for calculations.
     for row in rows:
         goal_diff = int(row[8])
         point = int(row[9])
@@ -68,10 +68,11 @@ for year, rows in yearly_data.items():
         goal_diff = int(row[8])
         point = int(row[9])
         rts = ((goal_diff - min_goal_diff) / std_goal_diff) * ((point - min_points) / std_points)
+        rts = round(rts, 2)
         row.append(rts)
 
 with open(OUTPUT_PATH, "w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
-    writer.writerow(header + ["RTS"])
+    writer.writerow(header + ["Relative Team Strength"])
     for year, rows in yearly_data.items():
         writer.writerows(rows)
