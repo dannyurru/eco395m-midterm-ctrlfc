@@ -47,7 +47,6 @@ We are calculating the RTS measure for each team by calculating the following:
 
 (Goal Difference - (Minimum Goal Difference - 1)/std(Goal Difference) * (Points - (Minimum Points - 1))/std(Points)
 
-=======
 We will implicitly place scores in brackets based on their RTS:
 
 0-5: Poor Team Strength
@@ -69,9 +68,14 @@ Our measure is strong at distinguishing differences in the strength of higher-pe
 
 # Findings
 Highest RTS score from 2003-2023 seasons in each league:
-English Premier League: Manchester United (2007-08) [RTS: 16.63]
-La Liga: Barcelona (2018) [RTS: 17.79]
 
+English Premier League: Manchester United (2007-08) [RTS: 16.63]
+
+La Liga: Barcelona (2018-2019) [RTS: 17.79]
+
+Serie A: Internazionale (2023-2024) [RTS: 17.81]
+
+French Ligue: Paris Saint-Germain (2015-2016) [RTS: 28.51]
 
 
 # Weaknesses of Data and Findings
