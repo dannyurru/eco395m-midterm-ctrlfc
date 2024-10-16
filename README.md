@@ -69,13 +69,15 @@ Our measure is strong at distinguishing differences in the strength of higher-pe
 
 
 # Findings
-Highest RTS score from 2003-2023 seasons in each league:
+Highest RTS Measure from 2003-2023 Seasons Across Leagues:
 
 English Premier League: Manchester United (2007-08) [RTS: 16.63]
 
 La Liga: Barcelona (2018-2019) [RTS: 17.79]
 
 Serie A: Internazionale (2023-2024) [RTS: 17.81]
+
+Bundesliga: Bayern Munich (2017-2018) [RTS: 20.7]
 
 French Ligue: Paris Saint-Germain (2015-2016) [RTS: 28.51]
 
