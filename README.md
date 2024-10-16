@@ -34,9 +34,12 @@ To collect the data, we run code that will use a base URL (i.e. For La Liga: "ht
 and a "season" string, which are the years 2003 to 2023, add these two strings together to create the URL per season,and run a for loop that 
 will scrape the aforementioned columns with their respective headings and create a csv file with this information. 
 
-We are creating the following columns using data that we either scraped or calculated:
+We are creating the following columns using data that we either scraped or calculated from existing data:
+
 The year of the season,
+
 The standing of each team per season,
+
 The "Relative Team Strength (RTS)" for each team per season
 
 We are calculating the RTS measure for each team by calculating the following:
@@ -47,7 +50,14 @@ We are calculating the RTS measure for each team by calculating the following:
 
 
 # Weaknesses of Data and Findings
+The structure of the RTS calculation makes it so the team in the lowest standing of the season would have an RTS of zero. However, when running the calculations, two issues seem to arise:
+
+The team in the last standing will have a RTS that is greater than zero
+
+The team in the last standing will have an RTS that is not the lowest of their respective season
+
 
 
 # Reproducibility
-To reproduce the data, you must use ESPN's website on soccer standings, regardless of the league. Copy the link without the year at the end and insert it into the base URL to define it. After this, the code should create the CSV file after running it. 
+To reproduce the data, you must use ESPN's website on soccer standings, regardless of the league. Copy either of the 5 links listed above without the year at the end and insert it into the base URL of either 
+code to define it. After this, the code should create the CSV file after running it. 
