@@ -67,7 +67,7 @@ Our measure is strong at distinguishing differences in the strength of higher-pe
 
 
 # Findings
-Best Team Strength: Barcelona 2018 17.79
+Best La Liga Team Strength: Barcelona 2018 17.79
 
 # Weaknesses of Data and Findings
 The structure of the RTS calculation makes it so the team in the lowest standing of the season would have an RTS of zero. However, when running the calculations, two issues seem to arise:
