@@ -14,13 +14,16 @@ for year in range(2003, 2024):
 
 
 def soupify_season(season):
-    """Given a season that extended from season to season + 1, return the soup taken from the ESPN site for EPL scoring table"""
+    """Given a season that extended from season to season + 1, return the soup taken from the ESPN site for Serie A scoring table"""
 
-    URL = "https://www.espn.com/soccer/standings/_/league/ENG.1/season/"
+    URL = "https://www.espn.com/soccer/standings/_/league/ita.1/season/"
     url = URL + season
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept': '*/*',
+        'User-Agent': '58.0.3029.110',
+        'Connection': 'keep-alive'
     }
 
     response = requests.get(url, headers=headers)
@@ -142,7 +145,7 @@ def write_data_to_csv(data, path):
 if __name__ == "__main__":
 
     BASE_DIR = "csv_collection"
-    CSV_PATH = os.path.join(BASE_DIR, "epl.csv")
+    CSV_PATH = os.path.join(BASE_DIR, "seriea.csv")
 
     data = []
 
