@@ -47,7 +47,8 @@ We are calculating the RTS measure for each team by calculating the following:
 (Goal Difference - (Minimum Goal Difference - 1)/std(Goal Difference) * (Points - (Minimum Points - 1))/std(Points)
 
 # Findings
-
+Highest RTS score from 2003-2023 seasons in each league:
+English Premier League: Manchester United (2007-08) [RTS: 16.63]
 
 # Weaknesses of Data and Findings
 The structure of the RTS calculation makes it so the team in the lowest standing of the season would have an RTS of zero. However, when running the calculations, two issues seem to arise:
