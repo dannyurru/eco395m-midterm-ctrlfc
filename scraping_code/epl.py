@@ -93,24 +93,27 @@ def write_data_to_csv(data, path):
         for dict_ in data:
             for i in range(len(dict_["names"])):
                 total_points = 0
-                minimum_GD = 0
+                minimum_GD = 100
+                minimum_points = 100
                 GD_diffs =[]
                 points_ = []
                 for j in range(len(dict_["names"])):
                     points_.append(int(dict_["stats"][j]["P"]))
                     total_points += int(dict_["stats"][j]["P"])
                     minimum_GD = min(minimum_GD, int(dict_["stats"][j]["GD"]))
+                    minimum_points = min(minimum_points, int(dict_["stats"][j]["P"]))
                 for j in range(len(dict_["names"])):
-                    GD_diffs.append(int(dict_["stats"][j]["GD"]) - minimum_GD)
+                    GD_diffs.append(int(dict_["stats"][j]["GD"]) - (minimum_GD - 1))
                 stdev_GD_diff = statistics.stdev(GD_diffs)
                 stdev_points = statistics.stdev(points_)
                 avg_points = total_points/20
                 dict_["RTS"] = []
                 for j in range(len(dict_["names"])):
-                    team_rts = (int(GD_diffs[j])/stdev_GD_diff)*((int(dict_["stats"][j]["P"]) - avg_points)/stdev_points)
+                    team_rts = round((int(GD_diffs[j])/stdev_GD_diff)*((int(dict_["stats"][j]["P"]) - (minimum_points - 1))/stdev_points), 2)
                     dict_["RTS"].append(team_rts)
+                print(dict_["RTS"])
 
-                outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]},{i + 1},{dict_["RTS"][j]}\n')
+                outfile.write(f'{dict_["names"][i]},{dict_["stats"][i]["GP"]},{dict_["stats"][i]["W"]},{dict_["stats"][i]["D"]},{dict_["stats"][i]["L"]},{dict_["stats"][i]["GF"]},{dict_["stats"][i]["GA"]},{dict_["stats"][i]["GD"]},{dict_["stats"][i]["P"]},{dict_["year"]},{i + 1},{dict_["RTS"][i]}\n')
 
     
 if __name__ == "__main__":
